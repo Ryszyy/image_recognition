@@ -125,7 +125,7 @@ class Classify(Resource):
         ret_json = {}
         with open("temp.jpg", "wb") as f:
             f.write(r.content)
-            proc = subprocess.Popen('python classify_image.py --model_dir=. --image_file=./temp.jpg',
+            proc = subprocess.Popen('python classify_image.py --model_dir=.',
                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
             var = proc.communicate()[0]
             proc.wait()
@@ -173,4 +173,4 @@ api.add_resource(Classify, '/classify')
 api.add_resource(Refill, '/refill')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0', port=5000)
